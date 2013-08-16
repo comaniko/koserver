@@ -260,7 +260,6 @@ struct _MONSTER_SUMMON_LIST
 struct _MONSTER_SUMMON_LIST_ZONE
 {
 	uint32	nIndex;
-	uint16	ZoneID;
 	uint16	sSid;
 	uint8	bType;
 };

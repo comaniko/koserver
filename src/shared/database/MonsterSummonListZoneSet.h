@@ -7,16 +7,15 @@ public:
 		: OdbcRecordset(dbConnection), m_pMap(pMap) {}
 
 	virtual tstring GetTableName() { return _T("MONSTER_SUMMON_LIST_ZONE"); }
-	virtual tstring GetColumns() { return _T("nIndex, ZoneID, sSid, bType"); }
+	virtual tstring GetColumns() { return _T("nIndex, sSid, bType"); }
 
 	virtual bool Fetch()
 	{
 		_MONSTER_SUMMON_LIST_ZONE * pData = new _MONSTER_SUMMON_LIST_ZONE;
 
 		_dbCommand->FetchUInt32(1, pData->nIndex);
-		_dbCommand->FetchUInt16(2, pData->ZoneID);
-		_dbCommand->FetchUInt16(3, pData->sSid);
-		_dbCommand->FetchByte(4, pData->bType);
+		_dbCommand->FetchUInt16(2, pData->sSid);
+		_dbCommand->FetchByte(3, pData->bType);
 
 		if (!m_pMap->PutData(pData->nIndex, pData))
 			delete pData;
