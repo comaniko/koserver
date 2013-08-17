@@ -4835,6 +4835,26 @@ void CUser::HandleMiningAttempt(Packet & pkt)
 	if (resultCode == MiningResultSuccess)
 	{
 		int rate = myrand(1, 100), random = myrand(1, 10000);
+
+		if (m_bPremiumType != 0)
+		{
+			_PREMIUM_ITEM* premiumRate = g_pMain->m_PremiumItemArray.GetData(m_bPremiumType);
+			if (premiumRate != nullptr)
+			{
+			    rate += (rate / 100) * premiumRate->DropPercent;
+				random += (rate / 100) * premiumRate->DropPercent;
+			}
+		}
+		if (pTable->m_iNum == GOLDEN_MATTOCK)
+		{
+		    rate += (rate / 100) * 10;
+		    random += (random / 100) * 10;
+		}
+			if (rate > 100)
+				rate = 100;
+			if (random > 10000)
+				random = 10000;
+
 		if (rate <= 50 && random <= 5000)
 		{
 			ExpChange(1);
@@ -4842,12 +4862,15 @@ void CUser::HandleMiningAttempt(Packet & pkt)
 		}
 		else if (rate >= 50 && rate <= 75 && random <= 7500)
 		{ 
-			GiveItem(389043000); // Sling
+			GiveItem(Sling);
 			sEffect = 13081; // "Item" effect
 		}
 		else if (rate >= 75 && rate <= 100 && random <= 10000)
 		{
-			GiveItem(399210000); // Mysterious Ore
+			if (pTable->m_iNum == MATTOCK)
+			    GiveItem(MYSTERIOUS_ORE);
+			else if(pTable->m_iNum == GOLDEN_MATTOCK)
+				GiveItem(MYSTERIOUS_GOLD_ORE);
 			sEffect = 13081; // "Item" effect
 		}
 		else

@@ -299,7 +299,10 @@ void CUser::GameStart(Packet & pkt)
 		RecastSavedMagic(); //ItemMallRecast
 
 		if (isGM())
-			g_pMain->SendChat<FORCE_CHAT>(string_format("Game master is online.For help, please contact %s",GetName().c_str()).c_str(),Nation::ALL,false);
+			g_pMain->SendChat<PUBLIC_CHAT>(string_format("Game master is online.Report problems with a private message. < %s >",GetName().c_str()).c_str(),Nation::ALL,false);
+		
+		if (isKing())
+		    g_pMain->SendChat<PUBLIC_CHAT>(string_format("King is online.I'm ready for my nation! < %s >",GetName().c_str()).c_str(),GetNation() == KARUS ? Nation::KARUS : Nation::ELMORAD,false);
 
 
 		// If we've relogged while dead, we need to make sure the client 
