@@ -872,13 +872,6 @@ void CUser::SendMyInfo()
 			<< uint16(pKnights->m_sCape)
 			<< pKnights->m_bCapeR << pKnights->m_bCapeG << pKnights->m_bCapeB << uint8(0);
 	}
-	if (isGM())
-	{
-		Packet Notice;
-		std::string GmNotice = string_format("Game master is online.For help, please contact %s",GetName().c_str());
-		ChatPacket::Construct(&Notice, FORCE_CHAT, &GmNotice);
-		g_pMain->Send_All(&Notice);
-	}
 	
 
 	result	<< uint8(2) << uint8(3) << uint8(4) << uint8(5) // unknown

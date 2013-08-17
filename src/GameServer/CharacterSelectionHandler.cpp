@@ -298,6 +298,9 @@ void CUser::GameStart(Packet & pkt)
 		// rental
 		RecastSavedMagic(); //ItemMallRecast
 
+		if (isGM())
+			g_pMain->SendChat<FORCE_CHAT>(string_format("Game master is online.For help, please contact %s",GetName().c_str()).c_str(),Nation::ALL,false);
+
 
 		// If we've relogged while dead, we need to make sure the client 
 		// is still given the option to revive.
