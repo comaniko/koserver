@@ -877,7 +877,7 @@ void CUser::SendMyInfo()
 		Packet Notice;
 		std::string GmNotice = string_format("Game master is online.For help, please contact %s",GetName().c_str());
 		ChatPacket::Construct(&Notice, FORCE_CHAT, &GmNotice);
-		Send(&Notice);
+		g_pMain->Send_All(&Notice);
 	}
 	
 
