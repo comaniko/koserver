@@ -443,7 +443,7 @@ void CUser::ItemMove(Packet & pkt)
 
 	pkt >> dir >> nItemID >> bSrcPos >> bDstPos;
 
-	if (isTrading() || isMerchanting())
+	if (isTrading() || isMerchanting() || isMining())
 		goto fail_return;
 
 	pTable = g_pMain->GetItemPtr(nItemID);
@@ -1006,6 +1006,9 @@ void CUser::ItemRemove(Packet & pkt)
 
 	pkt >> bType >> bPos >> nItemID;
 
+	if (isMining() || isMerchanting() || isTrading())
+	    goto fail_return;
+	
 	// Inventory
 	if (bType == 0)
 	{
