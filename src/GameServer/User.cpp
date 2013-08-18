@@ -4181,7 +4181,7 @@ void CUser::OnDeath(Unit *pKiller)
 						bool bKilledByRival = false;
 
 						// In PVP zones (just Ronark Land for now)
-						if (GetZoneID() == ZONE_RONARK_LAND)
+						if (isRankingPVPZone())
 						{
 							// Show death notices in PVP zones
 							noticeType = DeathNoticeCoordinates;
