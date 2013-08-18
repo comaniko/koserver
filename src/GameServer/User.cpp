@@ -622,8 +622,8 @@ void CUser::SendLoyaltyChange(int32 nChangeAmount /*= 0*/, bool bIsKillReward /*
 	}
 
 	result	<< m_iLoyalty << m_iLoyaltyMonthly
-		<< uint32(0) // Clan donations(? Donations made by this user? For the clan overall?)
-		<< nClanLoyaltyAmount; // Premium NP(? Additional NP gained?)
+		<< nClanLoyaltyAmount // Clan donations(? Donations made by this user? For the clan overall?)
+		<< uint32(0); // Premium NP(? Additional NP gained?)
 
 	Send(&result);
 }
