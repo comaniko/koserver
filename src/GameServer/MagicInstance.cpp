@@ -2452,6 +2452,7 @@ void MagicInstance::ReflectDamage(int32 damage, Unit * pTarget)
 		pSkillCaster->HpChange(-damage, pTarget);
 		break;
 	}
+	CMagicProcess::RemoveType4Buff(BUFF_TYPE_MAGE_ARMOR,pTarget,false);
 }
 
 void MagicInstance::ConsumeItem()
